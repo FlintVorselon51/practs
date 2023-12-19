@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .item {
+            height: 100px;
+            background-color: #ccc;
+            margin-bottom: 10px;
+        }
+
+    </style>
+</head>
+<body>
+<div id="container">
+    <div class="item">Элемент 1</div>
+    <div class="item">Элемент 2</div>
+    <div class="item">Элемент 3</div>
+</div>
+
+</body>
+<script>
+
+    // Функция для создания нового элемента
+    function createNewElement() {
+        var newItem = document.createElement('div');
+        newItem.className = 'item';
+        newItem.innerHTML = 'Новый элемент';
+        container.appendChild(newItem);
+    }
+
+    // Функция для проверки, достигнут ли конец страницы
+    function isEndOfPage() {
+        var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        var windowHeight = window.innerHeight || document.documentElement.clientHeight;
+        var documentHeight = document.documentElement.offsetHeight;
+
+        return scrollTop + windowHeight >= documentHeight;
+    }
+
+    // Обработчик события прокрутки страницы
+    window.addEventListener('scroll', function() {
+        if (isEndOfPage()) {
+            createNewElement();
+        }
+    });
+
+</script>
+</html>

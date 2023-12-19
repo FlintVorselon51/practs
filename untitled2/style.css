@@ -1,0 +1,119 @@
+h1 {
+    font-family: "Roboto", serif;
+    font-size: xxx-large;
+}
+
+h2 {
+    font-family: "Roboto", serif;
+    font-size: xx-large;
+}
+
+h3 {
+    font-family: "Roboto", serif;
+    font-size: x-large;
+    font-weight: 700;
+}
+
+main {
+    padding: 5%;
+    margin: 0 auto;
+    font-family: "Roboto", serif;
+}
+
+section, article > h2 {
+    margin-top: 18px;
+}
+
+
+
+
+#nav-header {
+    padding: 50px;
+    background-color: #021631;
+    display: flex;
+    flex-direction: row;
+    font-family: "Roboto", serif;
+    font-size: x-large;
+    font-weight: 700;
+}
+
+footer {
+    padding: 30px;
+    background-color: #37425B;
+    color: white;
+}
+
+nav li {
+    list-style-type: none;
+    margin-bottom: 20px;
+}
+
+/*nav li:not(:last-child) {*/
+/*    margin-bottom: 10px;*/
+/*}*/
+
+nav a:link {
+    color: white;
+    font-size: 32px;
+    text-decoration: none;
+}
+
+
+nav a:hover {
+    color: lightblue;
+    text-decoration: underline;
+}
+
+nav a:active {
+    color: yellow;
+}
+
+aside {
+    background-color: #feff9c;
+    margin-left: auto;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    padding: 20px;
+    border: 1px dashed #000;
+}
+
+#start-section {
+    display: flex;
+    flex-direction: row;
+    /*gap: 100px;*/
+}
+
+#start-section > p {
+    width: 40%;
+}
+
+#start-section > aside {
+    width: 30%;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+}
+
+
+img {
+    width: 100%
+}
+
+#hubble {
+    width: 70%;
+}
+
+address {
+    margin-top: 18px;
+}
+
+address > a {
+    text-decoration: none;
+    color: white;
+}
+
+/*    padding: 100px;*/
+/*}*/

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Captcha Example</title>
+    <style>
+        #captchaContainer {
+            -webkit-user-select: none; /* Safari */
+            user-select: none;
+        }
+    </style>
+</head>
+<body>
+<h2>Капча</h2>
+<form id="captchaForm" onsubmit="return validateCaptcha()">
+    <div id="captchaContainer"></div>
+    <input type="text" id="captchaInput" placeholder="Введите капчу">
+    <button type="submit" id="submitButton">Отправить</button>
+</form>
+
+<script>
+    let captchaContainer = document.getElementById("captchaContainer");
+    captchaContainer.oncopy = () => false;
+    captchaContainer.onpaste = () => false;
+    captchaContainer.oncut = () => false;
+    captchaContainer.onselect = () => false;
+    let input = document.getElementById("captchaInput");
+    let submitButton = document.getElementById("submitButton");
+    let isNumberCaptcha = false;
+    input.addEventListener("input", function () {
+        if (isNumberCaptcha === true) {
+            submitButton.disabled = !validateNumericCaptcha();
+        }
+    });
+    function generateCaptcha() {
+        captchaContainer.innerHTML = "";
+        let randomLetters = "";
+        for (let i = 0; i < 5; i++) {
+            let randomCharCode = Math.floor(Math.random() * 26) + 65;
+            randomLetters += makeid(1);
+        }
+        captchaContainer.innerHTML = randomLetters;
+    }
+
+    function makeid(length) {
+        let result = '';
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        const charactersLength = characters.length;
+        let counter = 0;
+        while (counter < length) {
+            result += characters.charAt(Math.floor(Math.random() * charactersLength));
+            counter += 1;
+        }
+        return result;
+    }
+
+
+    function validateCaptcha() {
+        if (isNumberCaptcha === false) {
+            let captchaInput = document.getElementById("captchaInput").value;
+            let captchaContainer = document.getElementById("captchaContainer").innerHTML;
+            console.log(captchaContainer, captchaInput, captchaContainer === captchaInput)
+            if (captchaInput === captchaContainer) {
+                console.log('923882')
+                return true;
+            }
+            else if (captchaInput === '') {
+                alert("Пустой ввод")
+                return false;
+            } else {
+                alert("Неправильная капча. Попробуйте еще раз.");
+                isNumberCaptcha = true;
+                generateNumericCaptcha();
+                submitButton.disabled = !validateNumericCaptcha();
+                return false;
+            }
+        } else {
+            if (validateNumericCaptcha()) {
+                return true;
+            }
+            else {
+                alert("Неправильная капча. Попробуйте еще раз.");
+                generateNumericCaptcha();
+            }
+        }
+    }
+
+    function generateNumericCaptcha() {
+        let num1 = Math.floor(Math.random() * 10);
+        let num2 = Math.floor(Math.random() * 10);
+        input.value = "";
+        document.getElementById("captchaContainer").innerHTML = num1 + " + " + num2 + " = ";
+    }
+
+    function validateNumericCaptcha() {
+        let userAnswer = parseInt(document.getElementById("captchaInput").value);
+        let num1 = parseInt(document.getElementById("captchaContainer").innerHTML.split(" ")[0]);
+        let num2 = parseInt(document.getElementById("captchaContainer").innerHTML.split(" ")[2]);
+        return userAnswer === (num1 + num2);
+    }
+
+    function isEmpty(obj) {
+        for (let key in obj) {
+            if (obj.hasOwnProperty(key)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    generateCaptcha();
+</script>
+</body>
+</html>

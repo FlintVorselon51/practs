@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spacecraft Store</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: "Roboto", sans-serif;
+        }
+        body {
+            margin: 0 100px;
+        }
+        .card {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 10px;
+            width: 200px;
+            display: inline-block;
+        }
+
+        .card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        .cart-item {
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: large;
+        }
+
+        .cart-item {
+            margin-bottom: 10px;
+        }
+        .cart-item h4 {
+            font-weight: bold;
+            margin: 0;
+        }
+
+        .cart-item p {
+            margin: 0;
+            font-size: 14px;
+        }
+
+        .cart-item button {
+            margin-left: 10px;
+        }
+
+    </style>
+</head>
+<body>
+<h1>Spacecraft Store</h1>
+
+<h3>Фильтрация</h3>
+
+<div>
+    <label for="min-price">Минимальная цена:</label>
+    <input type="number" id="min-price" name="min-price"><br><br>
+    <label for="max-price">Максимальная цена:</label>
+    <input type="number" id="max-price" name="max-price"><br><br>
+    <button><img src="filter.png" style="width: 40px; height: 40px" alt="filter" onclick="renderProducts()"></button>
+    <button><img src="sort-decreasing.svg" style="width: 40px; height: 40px" alt="filter" onclick="renderProducts(true)"></button>
+    <button><img src="sort-increasing.svg" style="width: 40px; height: 40px" alt="filter" onclick="renderProducts(false)"></button>
+</div>
+<h3>Товары</h3>
+<div id="products">
+</div>
+<div class="cart">
+    <h2>Корзина</h2>
+    <div id="cartItems"></div>
+    <p>Общая стоимость: $<span id="totalPrice">0</span></p>
+    <button onclick="clearCart()">Очистить корзину</button>
+</div>
+
+<script>
+    let products = [
+        {
+            "name": "Spaceship 1",
+            "description": "A heavy-duty spacecraft for transporting cargo to distant planets.",
+            "img_src": "starship.jpeg",
+            "price": 100
+        },
+        {
+            "name": "Spaceship 2",
+            "description": "A heavy-duty spacecraft for transporting cargo to distant planets.",
+            "img_src": "columbia.jpg",
+            "price": 200
+        },
+        {
+            "name": "Spaceship 3",
+            "description": "A heavy-duty spacecraft for transporting cargo to distant planets.",
+            "img_src": "some-rocket.jpg",
+            "price": 300
+        },
+    ];
+    let cart = [];
+
+    function addToCart(name, price) {
+        let item = cart.find(item => item.name === name);
+        if (item) {
+            item.quantity++;
+        } else {
+            cart.push({name, price, quantity: 1});
+        }
+        showCart();
+    }
+
+    function removeFromCart(name) {
+        let index = cart.findIndex(item => item.name === name);
+        cart.splice(index, 1);
+        showCart();
+    }
+
+    function increaseQuantity(name) {
+        let item = cart.find(item => item.name === name);
+        item.quantity++;
+        showCart();
+    }
+
+    function showCart() {
+        let cartItems = document.getElementById('cartItems');
+        let totalPrice = document.getElementById('totalPrice');
+        cartItems.innerHTML = '';
+        let total = 0;
+        cart.forEach(item => {
+            let div = document.createElement('div');
+            div.classList.add('cart-item');
+            // div.innerHTML = item.name + ' - ' + item.price + ' x ' + item.quantity;
+
+            let itemName = document.createElement('h4');
+            itemName.textContent = item.name;
+            div.appendChild(itemName);
+
+            const itemPrice = document.createElement('p');
+            itemPrice.textContent = `$${item.price}`;
+            div.appendChild(itemPrice);
+
+            const itemQuantity = document.createElement('p');
+            itemQuantity.textContent = item.quantity;
+            div.appendChild(itemQuantity);
+
+            let buttonDiv = document.createElement('div');
+
+            let removeButton = document.createElement('button');
+            removeButton.onclick = () => {removeFromCart(item.name)};
+            let removeImage = document.createElement('img');
+            removeImage.src = 'delete.png';
+            removeImage.width = removeImage.height = 25;
+            removeButton.appendChild(removeImage);
+            buttonDiv.appendChild(removeButton);
+
+            let plusButton = document.createElement('button');
+            plusButton.onclick = () => {increaseQuantity(item.name)};
+            let plusImage = document.createElement('img');
+            plusImage.src = 'plus.png';
+            plusImage.width = plusImage.height = 25;
+            plusButton.appendChild(plusImage);
+            buttonDiv.appendChild(plusButton);
+
+            div.appendChild(buttonDiv);
+
+            cartItems.appendChild(div);
+            total += item.price * item.quantity;
+        });
+        totalPrice.textContent = total;
+    }
+
+    function clearCart() {
+        cart = [];
+        showCart();
+    }
+
+    function priceFilter(arr, a, b) {
+        return arr.filter(item => item.price >= a && item.price <= b);
+    }
+
+    function renderProducts(isIncreasingOrder=undefined) {
+        // <div className="card" id="item3">
+        //     <img src="spaceship3.jpg" alt="Spaceship 3">
+        //         <h3>Spaceship 3</h3>
+        //         <p>Description: A heavy-duty spacecraft for transporting cargo to distant planets.</p>
+        //         <p>Цена: $200,000,000</p>
+        //         <button onClick="addToCart('Spaceship 3', 200000000)">Добавить в корзину</button>
+        // </div>
+
+        let filteredProducts = products;
+
+        if (isIncreasingOrder === true || isIncreasingOrder === false) {
+
+            function compare(a,b) {
+                if (a.price < b.price)
+                    return -1;
+                if (a.price > b.price)
+                    return 1;
+                return 0;
+            }
+            filteredProducts.sort(compare);
+            if (isIncreasingOrder === false) {
+                filteredProducts.reverse();
+            }
+        }
+        let minPrice = document.getElementById('min-price').value;
+        let maxPrice = document.getElementById('max-price').value;
+
+        if (minPrice !== '' && maxPrice !== '') {
+            filteredProducts = priceFilter(filteredProducts, minPrice, maxPrice);
+        }
+
+        let div = document.getElementById('products');
+        div.innerHTML = '';
+
+        filteredProducts.forEach(product => {
+           let productDiv = document.createElement('div');
+           productDiv.classList.add('card');
+
+           let productImg = document.createElement('img');
+           productImg.src = product.img_src;
+           productDiv.appendChild(productImg);
+
+           let productHeader = document.createElement('h3');
+           productHeader.textContent = product.name;
+           productDiv.appendChild(productHeader);
+
+           let productDescription = document.createElement('p');
+           productDescription.textContent = product.description;
+           productDiv.appendChild(productDescription);
+
+           let productPrice = document.createElement('p');
+           productPrice.textContent = `Цена: $${product.price}`;
+           productDiv.appendChild(productPrice);
+
+           let productButton = document.createElement('button');
+           productButton.onclick = () => addToCart(product.name, product.price);
+           productButton.textContent = 'Добавить в корзину';
+           productDiv.appendChild(productButton);
+
+           div.appendChild(productDiv);
+        });
+    }
+
+    renderProducts();
+
+</script>
+</body>
+</html>

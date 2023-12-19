@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .notification-close {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div id="notifications-container"></div>
+</body>
+<script>
+    function createNotification(text) {
+        // Создаем элемент уведомления
+        var notification = document.createElement('div');
+        notification.className = 'notification';
+
+        // Добавляем текст уведомления
+        var notificationText = document.createTextNode(text);
+        notification.appendChild(notificationText);
+
+        // Создаем элемент закрытия уведомления
+        var closeBtn = document.createElement('span');
+        closeBtn.className = 'notification-close';
+        closeBtn.innerHTML = '&times;';
+
+        // Добавляем обработчик события для закрытия уведомления
+        closeBtn.addEventListener('click', function () {
+            notification.style.display = 'none';
+        });
+
+        // Добавляем элемент закрытия уведомления в уведомление
+        notification.appendChild(closeBtn);
+
+        // Добавляем уведомление в контейнер
+        var container = document.getElementById('notifications-container');
+        container.appendChild(notification);
+    }
+    createNotification('Привет, мир!');
+</script>
+
+</html>

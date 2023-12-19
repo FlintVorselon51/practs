@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <style>
+        div {
+            font-family: Roboto, sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="parallax-container">
+        <div>"Космос - это бескрайний океан возможностей, который притягивает нас своей загадочностью и красотой. Исследование космоса расширяет наши границы познания и вдохновляет на поиск ответов на самые глубокие вопросы о происхождении жизни и нашего места во Вселенной. Космические открытия способны изменить не только наше понимание окружающего мира, но и самих себя, расширяя наши горизонты и заставляя задуматься о смысле нашего существования."</div>
+    </div>
+    <div class="parallax-container">
+        <div>"Космос - это бескрайний океан возможностей, который притягивает нас своей загадочностью и красотой. Исследование космоса расширяет наши границы познания и вдохновляет на поиск ответов на самые глубокие вопросы о происхождении жизни и нашего места во Вселенной. Космические открытия способны изменить не только наше понимание окружающего мира, но и самих себя, расширяя наши горизонты и заставляя задуматься о смысле нашего существования."</div>
+    </div>
+    <div class="parallax-container">
+        <div>"Космос - это бескрайний океан возможностей, который притягивает нас своей загадочностью и красотой. Исследование космоса расширяет наши границы познания и вдохновляет на поиск ответов на самые глубокие вопросы о происхождении жизни и нашего места во Вселенной. Космические открытия способны изменить не только наше понимание окружающего мира, но и самих себя, расширяя наши горизонты и заставляя задуматься о смысле нашего существования."</div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var parallaxContainers = document.querySelectorAll('.parallax-container');
+
+            function handleScroll() {
+                let scrolledValue = window.scrollY;
+                parallaxContainers.forEach(element => {
+                    element.style.backgroundPositionY = -(scrolledValue * 0.55) + 'px';
+                })
+                
+            }
+
+            window.addEventListener('scroll', handleScroll);
+
+            handleScroll();
+        });
+    </script>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 200vh; /* увеличиваем высоту страницы, чтобы можно было прокрутить */
+        }
+
+        .parallax-container {
+            background-image: url('../images/BackdropBlackLittleSparkBlack.png');
+            background-size: cover;
+            background-position: center;
+            height: 100vh; /* высота контейнера, чтобы изображение занимало весь экран */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+        }
+
+        .parallax-container div {
+            margin: auto;
+            width: 500px;
+            padding: 15px;
+            background-color: black;
+        }
+    </style>
+</body>
+</html>

@@ -1,0 +1,98 @@
+:root {
+    --transistion-delay: 0.2s;
+}
+
+* {
+    color: white;
+    font-family: Roboto, serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: content-box;
+}
+
+body {
+    background: #1f2833;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    width: 75%;
+    border: 2px solid white;
+    border-radius: 40px;
+    padding: 40px;
+}
+
+.wrapper {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.form .input-box {
+    position: relative;
+    padding: 20px;
+}
+
+.form .input-box input,
+.form .input-box input:empty{
+    background: transparent;
+    padding: 5px 0;
+    font-size: 1rem;
+    font-family: "Roboto", serif;
+    outline: none;
+    border: none;
+    width: 100%;
+    border-bottom: 1px solid white;
+    transition: var(--transistion-delay) linear;
+}
+
+/*.form .input-box input:empty {*/
+    /*padding: 5 pxpx;*/
+    /*margin-top: 10px;*/
+/*}*/
+
+.form .input-box input:empty:not(:invalid) {
+    padding: 15px 10px;
+    margin-top: 10px;
+}
+
+.form .input-box input:focus,
+.form .input-box input:valid {
+    padding: 15px 10px;
+    background-color: #37425B;
+    margin-top: 10px;
+}
+
+.form .input-box input:focus ~ label,
+.form .input-box input:valid ~ label {
+    padding: 5px;
+}
+
+.form button {
+    padding: 15px 10px;
+    border-radius: 10px;
+    background-color: white;
+    border: 1px solid black;
+}
+
+.form button:hover {
+    background-color: gainsboro;
+}
+
+.form .input-box label {
+    position: absolute;
+    font-size: 18px;
+    font-family: "Roboto", serif;
+    top: 0;
+    left: 0;
+    padding: 20px;
+    transition: var(--transistion-delay) linear;
+}
+
+#button-text {
+    font-size: 1.4em;
+    color: #1f2833;
+}

@@ -1,0 +1,161 @@
+h1 {
+    font-family: "Roboto", serif;
+    font-size: xxx-large;
+}
+
+h2 {
+    font-family: "Roboto", serif;
+    font-size: xx-large;
+}
+
+h3 {
+    font-family: "Roboto", serif;
+    font-size: x-large;
+    font-weight: 700;
+}
+
+main {
+    padding: 65px 5% 5%;
+    margin: 0 auto;
+    font-family: "Roboto", serif;
+}
+
+section, article > h2 {
+    margin-top: 18px;
+}
+
+#nav-header {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    padding: 15px;
+    background-color: #021631;
+    display: flex;
+    flex-direction: row;
+    font-family: "Roboto", serif;
+    font-size: x-large;
+    font-weight: 700;
+    height: 50px;
+}
+
+#nav-header a {
+    position: relative;
+    left: 20px;
+}
+
+#nav-header img {
+    height: 100%;
+    width: auto;
+}
+
+footer {
+    padding: 30px;
+    background-color: #37425B;
+    color: white;
+}
+
+nav ul {
+    position: absolute;
+    left: 50px;
+    top: 22px;
+    width: 90%;
+    margin: 0;
+    padding: 0;
+}
+
+nav li {
+    list-style-type: none;
+    margin-bottom: 10px;
+    text-align: center;
+    float: left;
+    position: relative;
+    width: 26.67%;
+    margin-left: 5% ;
+}
+
+nav a {
+    width: 50px;
+}
+
+nav a:link {
+    color: white;
+    font-size: 16px;
+    text-decoration: none;
+}
+
+nav a:hover {
+    color: lightblue;
+    text-decoration: underline;
+}
+
+nav a:active {
+    color: yellow;
+}
+
+aside {
+    background-color: #feff9c;
+    margin-left: auto;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    padding: 20px;
+    border: 1px dashed #000;
+}
+
+#start-section {
+    display: flex;
+    flex-direction: row;
+    /*gap: 100px;*/
+}
+
+#start-section > p {
+    width: 40%;
+}
+
+#start-section > aside {
+    width: 30%;
+}
+
+.row-container {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+}
+
+
+img {
+    width: 100%
+}
+
+.anchor {
+    scroll-margin-top: 90px;
+}
+
+#img-new-horizons {
+    z-index: -1;
+    top: 105px;
+    position: sticky;
+}
+
+#hubble {
+    width: 70%;
+}
+
+#img-hubble {
+    float: left;
+    width: 50%;
+    margin-right: 15px;
+    margin-bottom: 15px;
+}
+
+address {
+    margin-top: 18px;
+}
+
+address > a {
+    text-decoration: none;
+    color: white;
+}
+
+#li-hubble {
+    list-style: none;
+}
